@@ -1,0 +1,26 @@
+.Profile-pic {
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.Profile-pic-image {
+    outline: black;
+    outline-width: 3px;
+    outline-style: solid;
+}
+
+.Character-name {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.Character-spec {
+    font-size: 20px;
+}
+
+.Character-ilvl {
+    color: yellow;
+    font-weight: bold;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}
