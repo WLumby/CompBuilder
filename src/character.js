@@ -31,8 +31,7 @@ class Character extends React.Component {
     }
 
     componentDidMount = () => {
-        var char = this.getCharacter(this.props.region, this.props.realm, this.props.name)     
-        console.log(char);
+        this.getCharacter(this.props.region, this.props.realm, this.props.name);
     }
 
     render = () => {

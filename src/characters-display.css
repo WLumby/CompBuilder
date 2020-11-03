@@ -1,0 +1,18 @@
+.Buttons {
+    padding-top: 20px;
+}
+
+.Character-input {
+    padding: 15px;
+}
+
+.Character-input-box {
+    padding: 10px;
+}
+
+.Add-button {
+    color: white;
+    background-color: darkslategrey;
+    font-size: x-large;
+    padding: 5px;
+}
