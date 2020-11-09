@@ -35,22 +35,26 @@ class Character extends React.Component {
     }
 
     render = () => {
-        return (
-            <div className='Character'>
-                <div className='Profile-pic'>
-                    <img className='Profile-pic-image' src={this.state.character.thumbnail_url}/>
+        if (this.state.character.name) {
+            return (
+                <div className='Character'>
+                    <div className='Profile-pic'>
+                        <img className='Profile-pic-image' src={this.state.character.thumbnail_url}/>
+                    </div>
+                    <div className='Character-name'>
+                        {(this.state.character.name)}
+                    </div>
+                    <div className='Character-spec'>
+                        {(this.state.character.active_spec_name)}
+                    </div>
+                    <div className='Character-ilvl'>
+                        {this.state.character.gear?.item_level_equipped}
+                    </div>
                 </div>
-                <div className='Character-name'>
-                    {(this.state.character.name)}
-                </div>
-                <div className='Character-spec'>
-                    {(this.state.character.active_spec_name)}
-                </div>
-                <div className='Character-ilvl'>
-                    {this.state.character.gear?.item_level_equipped}
-                </div>
-            </div>
-        )
+            )
+        }
+
+        return null;
     }
 }
 
