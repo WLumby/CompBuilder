@@ -5,7 +5,12 @@ import './characters-display.css';
 class CharactersDisplay extends React.Component {
     
     state = {
-        characters: []
+        characters: [],
+        output: ''
+    }
+
+    charactersEmpty = () => {
+        return (Object.values(this.state.characters).length === 0)
     }
 
     addCharacter = (region, realm, name) => {
@@ -20,6 +25,9 @@ class CharactersDisplay extends React.Component {
 
         characters.push(newCharacter)
         this.setState({ characters: characters })
+
+        this.updateOutput();
+        document.getElementById('character-output').hidden = false;
     }
 
     removeButton = (removeCharacter) => {
@@ -28,6 +36,11 @@ class CharactersDisplay extends React.Component {
 
         delete characters[indexToBeRemoved]
         this.setState({ characters: characters });
+
+        this.updateOutput();
+        if (this.charactersEmpty()) {
+            document.getElementById('character-output').hidden = true;
+        }
     }
 
     addButton = () => {
@@ -38,8 +51,19 @@ class CharactersDisplay extends React.Component {
         }
     }
 
+    updateOutput = () => {
+        var characters = this.state.characters;
+        var charactersList = []
+        characters.forEach((item, index) => {
+            charactersList.push(item.props.children[1].props.name);
+        });
+
+        document.getElementById('character-output').textContent = 
+        'RAID COMPOSITION @here  \n-----------------------\n' + charactersList;
+    }
+
     renderCharacters = () => {
-        if (Object.values(this.state.characters).length === 0) {
+        if (this.charactersEmpty()) {
             return (
                 <div>
                     <div className='Empty-composition'>Composition is Empty</div>
@@ -50,7 +74,7 @@ class CharactersDisplay extends React.Component {
         
         return this.state.characters;
     }
-    
+
     render = () => {
         return (
             <div>
@@ -64,7 +88,7 @@ class CharactersDisplay extends React.Component {
                     {this.renderCharacters()}
                 </div>
                 <div className='Character-output'>
-                    <textarea className='Character-output-box' id='character-output'></textarea>
+                    <textarea className='Character-output-box' id='character-output' readOnly hidden></textarea>
                 </div>
             </div>
         )
