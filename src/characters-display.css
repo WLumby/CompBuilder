@@ -7,12 +7,21 @@
 }
 
 .Character-input-box {
-    padding: 10px;
+    padding: 12px;
+    font-size: x-large;
 }
 
 .Add-button {
     color: white;
-    background-color: darkslategrey;
-    font-size: x-large;
-    padding: 5px;
+    background-color: grey;
+    font-size: xx-large;
+    padding-top: 5px;
+    padding-bottom: 9px;
+    padding-left: 5px;
+    padding-right: 8px;
+    text-align: center;
+}
+
+.Add-button:hover {
+    background-color: darkslategray;
 }

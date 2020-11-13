@@ -23,7 +23,6 @@ class CharactersDisplay extends React.Component {
     addCharacter = (region, realm, name) => {
         var characters = this.state.characters;
         var newCharacter = <Character region={region} realm={realm} name={name}></Character>
-        console.log(newCharacter)
         characters.push(newCharacter)
         this.setState({ characters: characters })
     }
