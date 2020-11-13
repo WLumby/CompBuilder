@@ -4,7 +4,8 @@ import './character.css';
 class Character extends React.Component {
 
     state = {
-        character: {}
+        character: {},
+        icon: ''
     }
     
     getCharacter = (region, realm, name) => {
@@ -18,12 +19,24 @@ class Character extends React.Component {
         })
         .then(response => {
             this.setState({
-                character: response
+                character: response,
+                icon: this.setIcon(response.active_spec_role, response.name)
             });
         })
         .catch(error => {
             console.error(error);
         });
+    }
+
+    setIcon = (spec, name) => {
+        switch (spec) {
+            case 'HEALING':
+                return <img className='Spec-icon' id={name+'-icon'} role='Healer' src={require('./images/Healer_Icon.png')}/>
+            case 'TANK':
+                return <img className='Spec-icon' id={name+'-icon'} role='Tank' src={require('./images/Tank_Icon.png')}/>
+            default:
+                return <img className='Spec-icon' id={name+'-icon'} role='DPS' src={require('./images/Damage_Icon.png')}/>
+        }
     }
 
     makeRequest = (region, realm, name) => {
@@ -45,6 +58,7 @@ class Character extends React.Component {
                         {(this.state.character.name)}
                     </div>
                     <div className='Character-spec'>
+                        {this.state.icon}
                         {(this.state.character.active_spec_name)}
                     </div>
                     <div className='Character-ilvl'>

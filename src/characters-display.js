@@ -55,7 +55,11 @@ class CharactersDisplay extends React.Component {
         var characters = this.state.characters;
         var charactersList = []
         characters.forEach((item, index) => {
-            charactersList.push(item.props.children[1].props.name);
+            var name = item.props.children[1].props.name
+            charactersList.push(name);
+
+            var icon = document.getElementById(name+'-icon')
+            console.log(icon?.getAttribute('role'))
         });
 
         document.getElementById('character-output').textContent = 
