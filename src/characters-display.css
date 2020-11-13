@@ -1,29 +1,45 @@
 .Buttons {
     padding-top: 20px;
-}
-
-.Character-input {
-    padding: 15px;
+    align-items: center;
 }
 
 .Character-input-box {
-    padding: 12px;
+    padding: 15px;
     font-size: x-large;
+}
+
+.Character-output {
+    padding-top: 100px;
+}
+
+.Character-output-box {
+    padding: 5px;
+    font-size: medium;
+    height: 300px;
+    width: 400px;
 }
 
 .Add-button {
     color: white;
-    background-color: grey;
-    font-size: xx-large;
-    padding-top: 5px;
-    padding-bottom: 9px;
-    padding-left: 5px;
-    padding-right: 8px;
-    text-align: center;
+    background-color: black;
+    font-size: 30pt;
+    padding: 6px;
+    font-weight: bold;
+    vertical-align: middle;
 }
 
 .Add-button:hover {
     background-color: darkslategray;
+}
+
+.Empty-composition {
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.Empty-composition-explanation {
+    font-size: 15pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .Remove-button {

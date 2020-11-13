@@ -40,7 +40,12 @@ class CharactersDisplay extends React.Component {
 
     renderCharacters = () => {
         if (Object.values(this.state.characters).length === 0) {
-            return (<div>Composition is empty!</div>);
+            return (
+                <div>
+                    <div className='Empty-composition'>Composition is Empty</div>
+                    <div className='Empty-composition-explanation'>Add some raid members in the box above!</div>
+                </div>
+            );
         }
         
         return this.state.characters;
@@ -53,10 +58,13 @@ class CharactersDisplay extends React.Component {
                     <span className='Character-input'>
                         <input className='Character-input-box' id='character-input'></input>
                     </span>
-                    <button className='Add-button' onClick={this.addButton}>Add</button>
+                    <button className='Add-button' onClick={this.addButton}>+</button>
                 </div>
                 <div className='Characters'>
                     {this.renderCharacters()}
+                </div>
+                <div className='Character-output'>
+                    <textarea className='Character-output-box' id='character-output'></textarea>
                 </div>
             </div>
         )

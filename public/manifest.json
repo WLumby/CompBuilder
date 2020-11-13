@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Comp Builder",
+  "name": "WoW Composition Builder",
   "icons": [
     {
       "src": "favicon.ico",
