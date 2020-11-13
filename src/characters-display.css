@@ -25,3 +25,19 @@
 .Add-button:hover {
     background-color: darkslategray;
 }
+
+.Remove-button {
+    color: white;
+    background-color: red;
+    text-align: center;
+    font-size: x-large;
+    border-radius: 50%;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    margin-left: 20px;
+}
+
+.Remove-button:hover {
+    background-color: darkred;
+}

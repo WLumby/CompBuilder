@@ -5,26 +5,29 @@ import './characters-display.css';
 class CharactersDisplay extends React.Component {
     
     state = {
-        characters: [
-                <Character region='eu' realm='draenor' name='wyvurn'></Character>,
-                <Character region='eu' realm='draenor' name='durakan'></Character>,
-                <Character region='eu' realm='draenor' name='modsognir'></Character>,
-                <Character region='eu' realm='draenor' name='modsognir'></Character>,
-                <Character region='eu' realm='draenor' name='modsognir'></Character>,
-                <Character region='eu' realm='draenor' name='modsognir'></Character>,
-                <Character region='eu' realm='draenor' name='modsognir'></Character>,
-                <Character region='eu' realm='draenor' name='modsognir'></Character>,
-                <Character region='eu' realm='draenor' name='modsognir'></Character>,
-                <Character region='eu' realm='draenor' name='angrypotatoe'></Character>,
-                <Character region='eu' realm='draenor' name='derackon'></Character>,
-        ]
+        characters: []
     }
 
     addCharacter = (region, realm, name) => {
         var characters = this.state.characters;
-        var newCharacter = <Character region={region} realm={realm} name={name}></Character>
+
+        var newCharacter = (
+            <span>
+                <button className='Remove-button' onClick={() => this.removeButton(newCharacter)}>X</button>
+                <Character region={region} realm={realm} name={name}></Character>
+            </span>
+        )
+
         characters.push(newCharacter)
         this.setState({ characters: characters })
+    }
+
+    removeButton = (removeCharacter) => {
+        var characters = this.state.characters;
+        var indexToBeRemoved = characters.indexOf(removeCharacter);
+
+        delete characters[indexToBeRemoved]
+        this.setState({ characters: characters });
     }
 
     addButton = () => {
@@ -33,6 +36,14 @@ class CharactersDisplay extends React.Component {
             this.addCharacter('eu', 'draenor', input);
             document.getElementById('character-input').value = "";
         }
+    }
+
+    renderCharacters = () => {
+        if (Object.values(this.state.characters).length === 0) {
+            return (<div>Composition is empty!</div>);
+        }
+        
+        return this.state.characters;
     }
     
     render = () => {
@@ -45,7 +56,7 @@ class CharactersDisplay extends React.Component {
                     <button className='Add-button' onClick={this.addButton}>Add</button>
                 </div>
                 <div className='Characters'>
-                    {this.state.characters}
+                    {this.renderCharacters()}
                 </div>
             </div>
         )
