@@ -4,8 +4,10 @@
 }
 
 .Character-input-box {
-    padding: 15px;
+    padding: 8px;
     font-size: x-large;
+    background-color: rgb(26, 26, 26);
+    border: 0;
 }
 
 .Character-output {
@@ -14,16 +16,18 @@
 
 .Character-output-box {
     padding: 5px;
-    font-size: medium;
+    font-size: large;
     height: 300px;
-    width: 400px;
+    width: 600px;
+    background-color: rgb(26, 26, 26);
+    border: 0;
 }
 
 .Add-button {
     color: white;
-    background-color: black;
-    font-size: 30pt;
-    padding: 6px;
+    background-color: rgb(26, 26, 26);
+    border: 1;
+    font-size: 26pt;
     font-weight: bold;
     vertical-align: middle;
 }
@@ -56,4 +60,14 @@
 
 .Remove-button:hover {
     background-color: darkred;
+}
+
+.Dropdown {
+    color: white;
+    background-color: rgb(26, 26, 26);
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 8px;
+    margin: 5px;
+    border: 0;
 }

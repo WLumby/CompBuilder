@@ -44,9 +44,11 @@ class CharactersDisplay extends React.Component {
     }
 
     addButton = () => {
-        var input = document.getElementById('character-input').value;
-        if (input != "") {
-            this.addCharacter('eu', 'draenor', input);
+        var inputName = document.getElementById('character-input').value;
+        var inputRegion = document.getElementById('region-input').value;
+        var inputServer = document.getElementById('server-input').value;
+        if (inputName != "") {
+            this.addCharacter(inputRegion, inputServer, inputName);
             document.getElementById('character-input').value = "";
         }
     }
@@ -79,6 +81,29 @@ class CharactersDisplay extends React.Component {
         return this.state.characters;
     }
 
+    renderRegionDropdown = () => {
+        return (
+            <span>
+                <select className='Dropdown' id="region-input">
+                    <option value="eu">EU</option>
+                    <option value="na">NA</option>
+                </select>
+            </span>
+        )
+    }
+    
+    renderServerDropdown = () => {
+        return (
+            <span>
+                <select className='Dropdown' id="server-input">
+                    <option value="draenor">Draenor</option>
+                    <option value="kazzak">Kazzak</option>
+                    <option value="silvermoon">Silvermoon</option>
+                </select>
+            </span>
+        )
+    }
+
     render = () => {
         return (
             <div>
@@ -87,6 +112,10 @@ class CharactersDisplay extends React.Component {
                         <input className='Character-input-box' id='character-input'></input>
                     </span>
                     <button className='Add-button' onClick={this.addButton}>+</button>
+                    <div>
+                        {this.renderRegionDropdown()}
+                        {this.renderServerDropdown()}
+                    </div>
                 </div>
                 <div className='Characters'>
                     {this.renderCharacters()}
