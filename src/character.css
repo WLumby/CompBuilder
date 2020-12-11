@@ -8,15 +8,17 @@
     outline: black;
     outline-width: 3px;
     outline-style: solid;
+    max-height: 10vh;
+    max-width: 10vw;
 }
 
 .Character-name {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 70%;
 }
 
 .Character-spec {
-    font-size: 20px;
+    font-size: 60%;
 }
 
 .Character-ilvl {

@@ -8,19 +8,21 @@
     font-size: x-large;
     background-color: rgb(26, 26, 26);
     border: 0;
+    color: white;
 }
 
 .Character-output {
-    padding-top: 100px;
+    padding: 50px;
 }
 
 .Character-output-box {
     padding: 5px;
     font-size: large;
-    height: 300px;
-    width: 600px;
+    min-width: 60vw;
+    min-height: 30vh;
     background-color: rgb(26, 26, 26);
     border: 0;
+    color: white;
 }
 
 .Add-button {
@@ -42,7 +44,7 @@
 }
 
 .Empty-composition-explanation {
-    font-size: 15pt;
+    font-size: 80%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -50,12 +52,17 @@
     color: white;
     background-color: red;
     text-align: center;
-    font-size: x-large;
+    font-size: 70%;
     border-radius: 50%;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
-    margin-left: 20px;
+    margin-left: 1.5vw;
+    margin-top: 1vh;
+    min-height: 20px;
+    min-width: 20px;
+    max-height: 40px;
+    max-width: 40px;
 }
 
 .Remove-button:hover {
