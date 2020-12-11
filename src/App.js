@@ -1,5 +1,6 @@
 import React from 'react';
 import CharactersDisplay from './characters-display';
+import InfoText from './info-text';
 import './App.css';
 
 class App extends React.Component {
@@ -13,7 +14,10 @@ class App extends React.Component {
           <CharactersDisplay/>
         </div>
         <footer className="Footer">
-          Footer
+          <div className="Footer-text">
+            <InfoText/>
+            <InfoText/>
+          </div>
         </footer>
       </div>
     );
