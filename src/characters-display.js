@@ -6,18 +6,55 @@ class CharactersDisplay extends React.Component {
     
     state = {
         characters: [],
-        output: ''
+        output: '',
+    }
+
+    storeCharacters = (region, realm, name) => {
+        var storedCharacters = window.localStorage.getItem("characters");
+        if (storedCharacters !== null) { 
+            storedCharacters = JSON.parse(storedCharacters)
+        } 
+        else storedCharacters = [];
+
+        storedCharacters.push({region, realm, name});
+        window.localStorage.setItem("characters", JSON.stringify(storedCharacters));
+    }
+
+    removeCharacter = (name) => {
+        var parsedCharacters = JSON.parse(window.localStorage.getItem("characters"));
+        var indexToBeRemoved;
+        parsedCharacters.forEach((char, i) => {
+            if (char && char.name === name) {
+                indexToBeRemoved = i;
+            }
+        });
+        
+        delete parsedCharacters[indexToBeRemoved];
+        window.localStorage.setItem("characters", JSON.stringify(parsedCharacters));
+    }
+
+    getCharacters = () => {
+        var localStorageCharacters = window.localStorage.getItem("characters");
+        var parsedCharacters = JSON.parse(localStorageCharacters);
+
+        if (parsedCharacters) {
+            parsedCharacters.forEach((char) => {
+                if (char) {
+                    this.addCharacter(char.region, char.realm, char.name, false);
+                }
+            });
+        }
     }
 
     charactersEmpty = () => {
         return (Object.values(this.state.characters).length === 0)
     }
 
-    addCharacter = (region, realm, name) => {
+    addCharacter = (region, realm, name, store) => {
         var characters = this.state.characters;
 
         var newCharacter = (
-            <span>
+            <span key={name}>
                 <button className='Remove-button' onClick={() => this.removeButton(newCharacter)}>X</button>
                 <Character region={region} realm={realm} name={name}></Character>
             </span>
@@ -28,11 +65,18 @@ class CharactersDisplay extends React.Component {
 
         this.updateOutput();
         document.getElementById('character-output').hidden = false;
+
+        if (store) {
+            this.storeCharacters(region, realm, name);
+        }
     }
 
     removeButton = (removeCharacter) => {
         var characters = this.state.characters;
         var indexToBeRemoved = characters.indexOf(removeCharacter);
+
+        console.log(removeCharacter.key);
+        this.removeCharacter(removeCharacter.key);
 
         delete characters[indexToBeRemoved]
         this.setState({ characters: characters });
@@ -48,7 +92,7 @@ class CharactersDisplay extends React.Component {
         var inputRegion = document.getElementById('region-input').value;
         var inputServer = document.getElementById('server-input').value;
         if (inputName !== "") {
-            this.addCharacter(inputRegion, inputServer, inputName);
+            this.addCharacter(inputRegion, inputServer, inputName, true);
             document.getElementById('character-input').value = "";
         }
     }
@@ -61,7 +105,6 @@ class CharactersDisplay extends React.Component {
             charactersList.push(name);
 
             var icon = document.getElementById(name+'-icon')
-            console.log(icon?.getAttribute('role'))
         });
 
         document.getElementById('character-output').textContent = 
@@ -102,6 +145,10 @@ class CharactersDisplay extends React.Component {
                 </select>
             </span>
         )
+    }
+
+    componentDidMount = () => {
+        this.getCharacters();
     }
 
     render = () => {
