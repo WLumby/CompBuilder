@@ -47,10 +47,14 @@ class Character extends React.Component {
         this.getCharacter(this.props.region, this.props.realm, this.props.name);
     }
 
+    onClick = () => {
+        window.location.href = this.state.character.profile_url;
+    }
+
     render = () => {
         if (this.state.character.name) {
             return (
-                <div className='Character'>
+                <div className='Character' onClick={this.onClick} cursor='grab'>
                     <div className='Profile-pic'>
                         <img className='Profile-pic-image' src={this.state.character.thumbnail_url}/>
                     </div>

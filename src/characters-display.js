@@ -47,7 +47,7 @@ class CharactersDisplay extends React.Component {
         var inputName = document.getElementById('character-input').value;
         var inputRegion = document.getElementById('region-input').value;
         var inputServer = document.getElementById('server-input').value;
-        if (inputName != "") {
+        if (inputName !== "") {
             this.addCharacter(inputRegion, inputServer, inputName);
             document.getElementById('character-input').value = "";
         }
