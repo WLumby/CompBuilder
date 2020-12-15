@@ -1,4 +1,5 @@
 import React from 'react';
+import BenchedCharacter from './benched-character';
 import Character from './character';
 import './characters-display.css';
 
@@ -6,6 +7,7 @@ class CharactersDisplay extends React.Component {
     
     state = {
         characters: [],
+        benchedCharacters: [],
         output: '',
         buttonText: 'Copy to Clipboard'
     }
@@ -23,19 +25,6 @@ class CharactersDisplay extends React.Component {
         window.localStorage.setItem("characters", JSON.stringify(storedCharacters));
     }
 
-    removeCharacter = (name) => {
-        var parsedCharacters = JSON.parse(window.localStorage.getItem("characters"));
-        var indexToBeRemoved;
-        parsedCharacters.forEach((char, i) => {
-            if (char && char.name === name) {
-                indexToBeRemoved = i;
-            }
-        });
-        
-        delete parsedCharacters[indexToBeRemoved];
-        window.localStorage.setItem("characters", JSON.stringify(parsedCharacters));
-    }
-
     getCharacters = () => {
         var localStorageCharacters = window.localStorage.getItem("characters");
         var parsedCharacters = JSON.parse(localStorageCharacters);
@@ -49,8 +38,36 @@ class CharactersDisplay extends React.Component {
         }
     }
 
+    storeBenchedCharacters = (region, realm, name) => {
+        var storedCharacters = window.localStorage.getItem("benched-characters");
+        if (storedCharacters !== null) { 
+            storedCharacters = JSON.parse(storedCharacters)
+        } 
+        else storedCharacters = [];
+
+        storedCharacters.push({region, realm, name});
+        window.localStorage.setItem("benched-characters", JSON.stringify(storedCharacters));
+    }
+
+    getBenchedCharacters = () => {
+        var localStorageCharacters = window.localStorage.getItem("benched-characters");
+        var parsedCharacters = JSON.parse(localStorageCharacters);
+
+        if (parsedCharacters) {
+            parsedCharacters.forEach((char) => {
+                if (char) {
+                    this.addCharacterToBench(char.region, char.realm, char.name, false);
+                }
+            });
+        }
+    }
+
     charactersEmpty = () => {
         return (Object.values(this.state.characters).length === 0)
+    }
+
+    charactersAndBenchEmpty = () => {
+        return (Object.values(this.state.characters).length === 0 && Object.values(this.state.benchedCharacters).length === 0)
     }
 
     addCharacter = (region, realm, name, store) => {
@@ -59,6 +76,7 @@ class CharactersDisplay extends React.Component {
         var newCharacter = (
             <span key={name}>
                 <button className='Remove-button' onClick={() => this.removeButton(newCharacter)}>X</button>
+                <button className='Bench-button' onClick={() => this.benchButton(newCharacter)}>B</button>
                 <Character region={region} realm={realm} name={name}></Character>
             </span>
         )
@@ -74,20 +92,49 @@ class CharactersDisplay extends React.Component {
         }
     }
 
-    removeButton = (removeCharacter) => {
-        var characters = this.state.characters;
-        var indexToBeRemoved = characters.indexOf(removeCharacter);
+    removeCharacter = (name) => {
+        var parsedCharacters = JSON.parse(window.localStorage.getItem("characters"));
+        var indexToBeRemoved;
+        parsedCharacters.forEach((char, i) => {
+            if (char && char.name === name) {
+                indexToBeRemoved = i;
+            }
+        });
+        
+        delete parsedCharacters[indexToBeRemoved];
+        window.localStorage.setItem("characters", JSON.stringify(parsedCharacters));
+    }
 
-        console.log(removeCharacter.key);
-        this.removeCharacter(removeCharacter.key);
+    addCharacterToBench = (region, realm, name, store) => {
+        var benchedCharacters = this.state.benchedCharacters;
 
-        delete characters[indexToBeRemoved]
-        this.setState({ characters: characters });
+        var newBenchedCharacter = (
+            <span key={name} className='Benched-character'>
+                <BenchedCharacter region={region} realm={realm} name={name}></BenchedCharacter>
+                <button className='Remove-button-benched' onClick={() => this.removeFromBenchButton(newBenchedCharacter)}>X</button>
+                <button className='Unbench-button' onClick={() => this.unbenchButton(newBenchedCharacter)}>A</button>
+            </span>
+        )
 
-        this.updateOutput();
-        if (this.charactersEmpty()) {
-            document.getElementById('character-output').hidden = true;
+        benchedCharacters.push(newBenchedCharacter);
+        this.setState({ benchedCharacters: benchedCharacters})
+
+        if (store) {
+            this.storeBenchedCharacters(region, realm, name);
         }
+    }
+
+    removeCharacterFromBench = (name) => {
+        var parsedCharacters = JSON.parse(window.localStorage.getItem("benched-characters"));
+        var indexToBeRemoved;
+        parsedCharacters.forEach((char, i) => {
+            if (char && char.name === name) {
+                indexToBeRemoved = i;
+            }
+        });
+        
+        delete parsedCharacters[indexToBeRemoved];
+        window.localStorage.setItem("benched-characters", JSON.stringify(parsedCharacters));
     }
 
     addButton = () => {
@@ -100,14 +147,58 @@ class CharactersDisplay extends React.Component {
         }
     }
 
+    removeButton = (removeCharacter) => {
+        var characters = this.state.characters;
+        var indexToBeRemoved = characters.indexOf(removeCharacter);
+
+        this.removeCharacter(removeCharacter.key);
+
+        delete characters[indexToBeRemoved]
+        this.setState({ characters: characters });
+
+        this.updateOutput();
+        if (this.charactersEmpty()) {
+            document.getElementById('character-output').hidden = true;
+        }
+    }
+
+    removeFromBenchButton = (removeCharacter) => {
+        var benchedCharacters = this.state.benchedCharacters;
+        var indexToBeRemoved = benchedCharacters.indexOf(removeCharacter);
+
+        this.removeCharacterFromBench(removeCharacter.key);
+
+        delete benchedCharacters[indexToBeRemoved]
+        this.setState({ benchedCharacters: benchedCharacters });
+
+        if (this.charactersEmpty()) {
+            document.getElementById('character-output').hidden = true;
+        }
+    }
+
+    benchButton = (benchCharacter) => {
+        this.removeButton(benchCharacter);
+        
+        var benchCharProps = benchCharacter.props.children[2].props;
+        this.addCharacterToBench(benchCharProps.region, benchCharProps.realm, benchCharProps.name, true)
+    }
+
+    unbenchButton = (unbenchCharacter) => {
+        this.removeFromBenchButton(unbenchCharacter);
+
+        console.log(unbenchCharacter.props)
+        
+        var unbenchCharProps = unbenchCharacter.props.children[0].props;
+        this.addCharacter(unbenchCharProps.region, unbenchCharProps.realm, unbenchCharProps.name, true)
+    }
+
     updateOutput = () => {
         var characters = this.state.characters;
         var charactersList = []
-        characters.forEach((item, index) => {
-            var name = item.props.children[1].props.name
-            charactersList.push(name);
 
-            var icon = document.getElementById(name+'-icon')
+        characters.forEach((item, index) => {
+            var name = item.key
+            charactersList.push(name);
         });
 
         document.getElementById('character-output').textContent = 
@@ -124,7 +215,7 @@ class CharactersDisplay extends React.Component {
     }
 
     renderCharacters = () => {
-        if (this.charactersEmpty()) {
+        if (this.charactersAndBenchEmpty()) {
             return (
                 <div>
                     <div className='Empty-composition'>Composition is Empty</div>
@@ -134,6 +225,10 @@ class CharactersDisplay extends React.Component {
         }
         
         return this.state.characters;
+    }
+
+    renderBench = () => {
+        return this.state.benchedCharacters;
     }
 
     renderRegionDropdown = () => {
@@ -171,6 +266,7 @@ class CharactersDisplay extends React.Component {
 
     componentDidMount = () => {
         this.getCharacters();
+        this.getBenchedCharacters();
     }
 
     render = () => {
@@ -188,6 +284,9 @@ class CharactersDisplay extends React.Component {
                 </div>
                 <div className='Characters'>
                     {this.renderCharacters()}
+                </div>
+                <div className='Characters-benched'>
+                    {this.renderBench()}
                 </div>
                 <div className='Character-output'>
                     <textarea className='Character-output-box' id='character-output' ref={(ref) => this.copyText = ref} readOnly hidden></textarea>

@@ -3,6 +3,14 @@
     align-items: center;
 }
 
+.Benched-character {
+    display: inline-block;
+}
+
+.Characters-benched {
+    padding-top: 20px;
+}
+
 .Copy-button {
     padding: 10px;
     min-width: 175px;
@@ -79,8 +87,63 @@
     max-width: 40px;
 }
 
+.Remove-button-benched {
+    color: white;
+    background-color: red;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 20px;
+    min-width: 20px;
+    max-height: 50px;
+    max-width: 50px;
+}
+
+.Bench-button {
+    color: white;
+    background-color: blue;
+    text-align: center;
+    font-size: 70%;
+    border-radius: 50%;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    margin-left: 1.5vw;
+    margin-top: 3.5vh;
+    min-height: 20px;
+    min-width: 20px;
+    max-height: 40px;
+    max-width: 40px;
+}
+
+.Unbench-button {
+    color: white;
+    background-color: green;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 20px;
+    min-width: 20px;
+    max-height: 50px;
+    max-width: 50px;
+}
+
 .Remove-button:hover {
     background-color: darkred;
+}
+
+.Remove-button-benched:hover {
+    background-color: darkred;
+}
+
+.Bench-button:hover {
+    background-color: darkblue;
+}
+
+.Unbench-button:hover {
+    background-color: darkgreen;
 }
 
 .Dropdown {

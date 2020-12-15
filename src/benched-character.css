@@ -1,0 +1,12 @@
+.Character-benched-name {
+    font-weight: bold;
+    font-size: 16pt;
+    padding-left: 10px;
+    padding-right: 2px;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.Character-benched-spec-icon {
+    padding-right: 2px;
+}
