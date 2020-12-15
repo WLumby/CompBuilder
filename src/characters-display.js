@@ -285,6 +285,7 @@ class CharactersDisplay extends React.Component {
                 <div className='Characters'>
                     {this.renderCharacters()}
                 </div>
+                <hr className='Characters-divider'/>
                 <div className='Characters-benched'>
                     {this.renderBench()}
                 </div>

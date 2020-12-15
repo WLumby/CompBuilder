@@ -10,3 +10,10 @@
 .Character-benched-spec-icon {
     padding-right: 2px;
 }
+
+.Characters-divider {
+    width: 50%;
+    border-color: black;
+    background-color: black;
+    height: 2px;
+}
