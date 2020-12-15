@@ -7,7 +7,10 @@ class CharactersDisplay extends React.Component {
     state = {
         characters: [],
         output: '',
+        buttonText: 'Copy to Clipboard'
     }
+
+    copyText = null;
 
     storeCharacters = (region, realm, name) => {
         var storedCharacters = window.localStorage.getItem("characters");
@@ -111,6 +114,15 @@ class CharactersDisplay extends React.Component {
         'RAID COMPOSITION @here  \n-----------------------\n' + charactersList;
     }
 
+    copyToClipboard = () => {
+        this.copyText.select();
+        document.execCommand("copy");
+
+        this.setState({
+            buttonText: 'Copied!'
+        })
+    }
+
     renderCharacters = () => {
         if (this.charactersEmpty()) {
             return (
@@ -168,7 +180,12 @@ class CharactersDisplay extends React.Component {
                     {this.renderCharacters()}
                 </div>
                 <div className='Character-output'>
-                    <textarea className='Character-output-box' id='character-output' readOnly hidden></textarea>
+                    <textarea className='Character-output-box' id='character-output' ref={(ref) => this.copyText = ref} readOnly hidden></textarea>
+                    <div>
+                        <button className='Copy-button' onClick={this.copyToClipboard}>
+                            {this.state.buttonText}
+                        </button>
+                    </div>
                 </div>
             </div>
         )
