@@ -146,6 +146,16 @@ class CharactersDisplay extends React.Component {
             </span>
         )
     }
+
+    renderCopyButton = () => {
+        if (!this.charactersEmpty()) {
+            return (
+                <button className='Copy-button' onClick={this.copyToClipboard}>
+                    {this.state.buttonText}
+                </button>
+            )
+        }
+    }
     
     renderServerDropdown = () => {
         return (
@@ -182,9 +192,7 @@ class CharactersDisplay extends React.Component {
                 <div className='Character-output'>
                     <textarea className='Character-output-box' id='character-output' ref={(ref) => this.copyText = ref} readOnly hidden></textarea>
                     <div>
-                        <button className='Copy-button' onClick={this.copyToClipboard}>
-                            {this.state.buttonText}
-                        </button>
+                        {this.renderCopyButton()}
                     </div>
                 </div>
             </div>
