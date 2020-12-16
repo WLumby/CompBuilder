@@ -76,7 +76,7 @@ class CharactersDisplay extends React.Component {
         var newCharacter = (
             <span key={name}>
                 <button className='Remove-button' onClick={() => this.removeButton(newCharacter)}>X</button>
-                <button className='Bench-button' onClick={() => this.benchButton(newCharacter)}>B</button>
+                <button className='Bench-button' onClick={() => this.benchButton(newCharacter)}>-</button>
                 <Character region={region} realm={realm} name={name}></Character>
             </span>
         )
@@ -112,7 +112,7 @@ class CharactersDisplay extends React.Component {
             <span key={name} className='Benched-character'>
                 <BenchedCharacter region={region} realm={realm} name={name}></BenchedCharacter>
                 <button className='Remove-button-benched' onClick={() => this.removeFromBenchButton(newBenchedCharacter)}>X</button>
-                <button className='Unbench-button' onClick={() => this.unbenchButton(newBenchedCharacter)}>A</button>
+                <button className='Unbench-button' onClick={() => this.unbenchButton(newBenchedCharacter)}>+</button>
             </span>
         )
 
