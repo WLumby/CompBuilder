@@ -141,7 +141,7 @@ class CharactersDisplay extends React.Component {
         var inputName = document.getElementById('character-input').value;
         var inputRegion = document.getElementById('region-input').value;
         var inputServer = document.getElementById('server-input').value;
-        if (inputName !== "") {
+        if (inputName !== "" && !this.checkAlreadyExists(inputName)) {
             this.addCharacter(inputRegion, inputServer, inputName, true);
             document.getElementById('character-input').value = "";
         }
@@ -185,8 +185,6 @@ class CharactersDisplay extends React.Component {
 
     unbenchButton = (unbenchCharacter) => {
         this.removeFromBenchButton(unbenchCharacter);
-
-        console.log(unbenchCharacter.props)
         
         var unbenchCharProps = unbenchCharacter.props.children[0].props;
         this.addCharacter(unbenchCharProps.region, unbenchCharProps.realm, unbenchCharProps.name, true)
@@ -212,6 +210,24 @@ class CharactersDisplay extends React.Component {
         this.setState({
             buttonText: 'Copied!'
         })
+    }
+
+    checkAlreadyExists = (name) => {
+        var found = false;
+        
+        this.state.characters.forEach((char) => {
+            if (char.key === name) {
+                found = true;
+            }
+        });
+
+        this.state.benchedCharacters.forEach((char) => {
+            if (char.key === name) {
+                found = true;
+            }
+        });
+
+        return found;
     }
 
     renderCharacters = () => {
