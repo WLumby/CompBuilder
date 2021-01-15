@@ -85,6 +85,7 @@
     min-width: 20px;
     max-height: 40px;
     max-width: 40px;
+    box-shadow: 0 0 0 1pt black;
 }
 
 .Remove-button-benched {
@@ -98,6 +99,7 @@
     min-width: 20px;
     max-height: 50px;
     max-width: 50px;
+    box-shadow: 0 0 0 1pt black;
 }
 
 .Bench-button {
@@ -115,6 +117,7 @@
     min-width: 20px;
     max-height: 40px;
     max-width: 40px;
+    box-shadow: 0 0 0 1pt black;
 }
 
 .Unbench-button {
@@ -128,6 +131,7 @@
     min-width: 20px;
     max-height: 50px;
     max-width: 50px;
+    box-shadow: 0 0 0 1pt black;
 }
 
 .Remove-button:hover {
