@@ -1,17 +1,17 @@
 import React from 'react';
 import { render } from '@testing-library/react'
-import InfoText from './info-text';
+import App from './App';
 import {} from '@testing-library/jest-dom/extend-expect'
 
 const renderComponent = () => {
     return render(
-        <InfoText/>
+        <App/>
     );
 };
 
-test('renders bottom info text correctly', () => {
+test('renders page heading correctly', () => {
     const { getByText } = renderComponent();
-    const element = getByText('Lorem ipsum');
+    const element = getByText('CompBuilder');
 
     expect(element).toBeInTheDocument();
 })
