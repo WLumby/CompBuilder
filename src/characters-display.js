@@ -77,7 +77,7 @@ class CharactersDisplay extends React.Component {
             <span key={name}>
                 <button className='Remove-button' onClick={() => this.removeButton(newCharacter)}>X</button>
                 <button className='Bench-button' onClick={() => this.benchButton(newCharacter)}>-</button>
-                <Character region={region} realm={realm} name={name}></Character>
+                <Character region={region} realm={realm} name={name} removeChar={this.removeInvalid}></Character>
             </span>
         )
 
@@ -93,6 +93,7 @@ class CharactersDisplay extends React.Component {
     }
 
     removeCharacter = (name) => {
+        console.log(name);
         var parsedCharacters = JSON.parse(window.localStorage.getItem("characters"));
         var indexToBeRemoved;
         parsedCharacters.forEach((char, i) => {
@@ -152,6 +153,21 @@ class CharactersDisplay extends React.Component {
         var indexToBeRemoved = characters.indexOf(removeCharacter);
 
         this.removeCharacter(removeCharacter.key);
+
+        delete characters[indexToBeRemoved]
+        this.setState({ characters: characters });
+
+        this.updateOutput();
+        if (this.charactersEmpty()) {
+            document.getElementById('character-output').hidden = true;
+        }
+    }
+
+    removeInvalid = (removeCharacter) => {
+        var characters = this.state.characters;
+        var indexToBeRemoved = characters.length - 1;
+
+        this.removeCharacter(removeCharacter.props.name);
 
         delete characters[indexToBeRemoved]
         this.setState({ characters: characters });

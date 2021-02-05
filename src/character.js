@@ -4,16 +4,24 @@ import './character.css';
 class Character extends React.Component {
 
     state = {
-        character: {},
+        character: {
+            name: 'Loading',
+            active_spec_name: 'Spec',
+            thumbnail_url: 'https://render-eu.worldofwarcraft.com/character/draenor/169/114121897-avatar.jpg?alt=wow/static/images/2d/avatar/8-0.jpg',
+            gear: {
+                item_level_equipped: 0
+            }
+        },
         icon: ''
     }
     
-    getCharacter = (region, realm, name) => {
+    getCharacter = (region, realm, name, removeChar) => {
         fetch(this.makeRequest(region, realm, name))
         .then(response => {
             if (response.status === 200) {
                 return response.json();
             } else {
+                removeChar(this);
                 throw new Error('Something went wrong on api server!');
             }
         })
@@ -44,7 +52,7 @@ class Character extends React.Component {
     }
 
     componentDidMount = () => {
-        this.getCharacter(this.props.region, this.props.realm, this.props.name);
+        this.getCharacter(this.props.region, this.props.realm, this.props.name, this.props.removeChar);
     }
 
     onClick = () => {
