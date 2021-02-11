@@ -5,8 +5,8 @@ class Character extends React.Component {
 
     state = {
         character: {
-            name: 'Loading',
-            active_spec_name: 'Spec',
+            name: '...',
+            active_spec_name: '...',
             thumbnail_url: 'https://render-eu.worldofwarcraft.com/character/draenor/169/114121897-avatar.jpg?alt=wow/static/images/2d/avatar/8-0.jpg',
             gear: {
                 item_level_equipped: 0
