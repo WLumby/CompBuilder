@@ -7,7 +7,7 @@ class Character extends React.Component {
         character: {
             name: '...',
             active_spec_name: '...',
-            thumbnail_url: 'https://render-eu.worldofwarcraft.com/character/draenor/169/114121897-avatar.jpg?alt=wow/static/images/2d/avatar/8-0.jpg',
+            thumbnail_url: 'https://wow.zamimg.com/images/wow/icons/large/spell_magic_lesserinvisibilty.jpg',
             gear: {
                 item_level_equipped: 0
             }
