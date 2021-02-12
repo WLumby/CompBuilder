@@ -39,11 +39,11 @@ class Character extends React.Component {
     setIcon = (spec, name) => {
         switch (spec) {
             case 'HEALING':
-                return <img className='Spec-icon' id={name+'-icon'} role='Healer' src={require('./images/Healer_Icon.png')}/>
+                return <img className='Spec-icon' id={name+'-icon'} role='Healer' src={require('./images/Healer_Icon.png')} alt='Healer Spec Icon'/>
             case 'TANK':
-                return <img className='Spec-icon' id={name+'-icon'} role='Tank' src={require('./images/Tank_Icon.png')}/>
+                return <img className='Spec-icon' id={name+'-icon'} role='Tank' src={require('./images/Tank_Icon.png')} alt='Tank Spec Icon'/>
             default:
-                return <img className='Spec-icon' id={name+'-icon'} role='DPS' src={require('./images/Damage_Icon.png')}/>
+                return <img className='Spec-icon' id={name+'-icon'} role='DPS' src={require('./images/Damage_Icon.png')} alt='DPS Spec Icon'/>
         }
     }
 
@@ -64,7 +64,7 @@ class Character extends React.Component {
             return (
                 <div className='Character' onClick={this.onClick} cursor='grab'>
                     <div className='Profile-pic'>
-                        <img className='Profile-pic-image' src={this.state.character.thumbnail_url}/>
+                        <img className='Profile-pic-image' src={this.state.character.thumbnail_url} alt='Character Portrait'/>
                     </div>
                     <div className='Character-name'>
                         {(this.state.character.name)}
