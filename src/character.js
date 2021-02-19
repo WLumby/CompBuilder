@@ -22,7 +22,7 @@ class Character extends React.Component {
                 return response.json();
             } else {
                 removeChar(this);
-                throw new Error('Something went wrong on api server!');
+                throw new Error('Error reading response / Response code not 200');
             }
         })
         .then(response => {
