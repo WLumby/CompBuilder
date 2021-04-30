@@ -71,7 +71,9 @@ class Character extends React.Component {
                     </div>
                     <div className='Character-spec'>
                         {this.state.icon}
-                        {(this.state.character.active_spec_name)}
+                        <span className='Character-spec-name'>
+                            {(this.state.character.active_spec_name)}
+                        </span>
                     </div>
                     <div className='Character-ilvl'>
                         {this.state.character.gear?.item_level_equipped}

@@ -10,14 +10,14 @@ const renderComponent = async () => {
     )
 }
 
-const mockFetch = (status, charName) => {
+const mockFetch = (status, charName, activeSpecName) => {
     window.fetch = jest.fn(() => {
         return Promise.resolve({
             status,
             json: (() => {
                 return {
                     name: charName,
-                    active_spec_name: 'Fire'
+                    active_spec_name: activeSpecName
                 }
             })
         })
@@ -26,8 +26,10 @@ const mockFetch = (status, charName) => {
 
 test('renders character correctly', async () => {
     const charName = 'Testname';
-    mockFetch(200, charName);
+    const activeSpecName = 'Outlaw';
+    mockFetch(200, charName, activeSpecName);
     const { container } = await renderComponent();
 
     expect(container.querySelector('.Character-name').innerHTML).toBe(charName);
+    expect(container.querySelector('.Character-spec-name').innerHTML).toBe(activeSpecName);
 });
