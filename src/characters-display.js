@@ -12,6 +12,8 @@ class CharactersDisplay extends React.Component {
         buttonText: 'Copy to Clipboard'
     }
 
+    MAX_CHARACTERS = 50;
+
     copyText = null;
 
     storeCharacters = (region, realm, name) => {
@@ -72,6 +74,11 @@ class CharactersDisplay extends React.Component {
 
     addCharacter = (region, realm, name, store) => {
         var characters = this.state.characters;
+        var charactersAmount = characters.length + this.state.benchedCharacters.length;
+
+        if (charactersAmount >= this.MAX_CHARACTERS) {
+            return
+        }
 
         var newCharacter = (
             <span key={name}>
